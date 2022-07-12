@@ -1,141 +1,144 @@
 //proyect
-// revisar bg head de main
 #body {
-  display: flex;
-  flex-direction: column;
-  min-height: $hv;
+  @include flex-column(column, center);
+  background-color: map-get($map: $bg, $key: 'black-main');
 
-  // nav principal
   #nav {
-    top: ($px - 500);
-    left: ($px - 500);
-    background: linear-gradient(to left, map-get($map:$bgcolors, $key:'bgnavline1', ), map-get($map:$bgcolors, $key:'bgnavline2', ), map-get($map:$bgcolors, $key:'bgnavline3', ), map-get($map:$bgcolors, $key:'bgnavline2', ), map-get($map:$bgcolors, $key:'bgnavline1', ));
-    display: flex;
-    justify-content: space-between;
+    @include flex(space-between, center);
+    width: $ptj;
     min-height: ($px - 460);
-    max-height: ($px - 460);
+    max-height: ($px - 450);
+    background: linear-gradient(to left, map-get($map:$bg, $key:'grey-1', ), map-get($map:$bg, $key:'grey-2', ), map-get($map:$bg, $key:'grey-3', ), map-get($map:$bg, $key:'grey-2', ), map-get($map:$bg, $key:'grey-1', ));
 
     a {
       align-self: center;
       text-decoration: none;
+      width: auto;
 
       span {
         font-size: $txtg;
         font-family: $titlefonts;
         margin-left: ($px - 495);
-        color: map-get($map: $colorf, $key: 'black');
-
-        @media (max-width: 380px) {
-          font-size: 1.5rem;
-        }
+        color: map-get($map:$color, $key:'black', );
 
         &:hover {
-          color: map-get($map: $colorf, $key: 'blue');
-          transform: 300ms;
+          color: map-get($map:$color, $key:'blue', );
+          transition: 300ms;
         }
       }
     }
 
-    ul.dis {
-      display: flex;
-      justify-content: space-around;
+    .dis {
+      @include flex(space-around, center);
       width: ($ptj - 70);
       margin-bottom: ($px - 500);
       padding-left: ($px - 500);
-
-      @media (max-width: 768px) {
-        display: none;
-      }
+      margin-right: ($px - 495);
+      ;
 
       li {
         list-style: none;
         align-self: center;
 
         a {
-          font-size: ($txtg - 0.5);
-          font-family: $titlefonts;
-          color: map-get($map: $colorf, $key: 'black');
+          font-size: ($txtg - .5);
+          font-family: $generalfonts;
+          color: map-get($map:$color, $key:'black', );
 
           &:hover {
-            color: map-get($map: $colorf, $key: 'blue');
-            transform: 300ms;
+            color: map-get($map:$color, $key:'blue', );
+            transition: 300ms;
           }
         }
       }
     }
 
-    li {
-      border: ($px - 500);
-      list-style: none;
-      align-self: center;
-    }
-
-    .navbar {
-      padding-top: ($px - 500);
-      padding-bottom: ($px - 500);
-      width: ($ptj - 70);
+    .dis-2 {
+      @extend .dis;
       display: none;
 
-      @media (max-width: 768px) {
-        display: flex;
-      }
-
       a {
-        font-size: 1.5rem;
-        font-family: $titlefonts;
-        color: map-get($map: $colorf, $key: 'black');
+        width: ($px - 468);
 
-        @media (max-width: 768px) {
-          font-size: 1.5rem;
+        img {
+          width: $ptj;
         }
+      }
+    }
 
-        &:hover {
-          color: map-get($map: $colorf, $key: 'blue');
-          transform: 300ms;
+    @media (max-width: 668px) {
+      .dis {
+        display: none;
+      }
+
+      .dis-2 {
+        display: flex;
+        width: auto;
+
+        a {
+          margin: ($px - 485);
+        }
+      }
+    }
+
+    @media (max-width: 380px) {
+      a {
+        span {
+          font-size: ($txtg - .5);
         }
       }
 
-      .container-fluid {
-        padding-right: ($px - 500);
-        padding-left: ($px - 500);
-        margin-right: ($px - 500);
-        margin-left: ($px - 500);
-
-        ul.dropdown {
-          margin-left: auto;
-          margin-right: ($px - 495);
-          margin-bottom: ($px - 500);
-          padding-left: ($px - 500);
-
-          ul {
-            background-color: map-get($map: $bgcolors, $key: 'bgdrop');
-            border-radius: ($px - 495);
-            border: map-get($map: $bgcolors, $key: 'bgw') solid ($px - 499);
-
-            a {
-              &:hover {
-                background-color: map-get($map: $bgcolors, $key: 'bgdrophover');
-                color: map-get($map: $colorf, $key: 'white');
-              }
-            }
-
-
-            li {
-              list-style: none;
-              align-self: center;
-            }
-          }
+      .dis-2 {
+        a {
+          width: ($px - 480);
+          margin: ($px - 495);
         }
       }
     }
   }
 
-  // main index
+  #nav2 {
+    @extend #nav;
+    @include flex(space-around, center);
+    margin-top: ($px - 480);
+    max-height: none;
+    background: map-get($map:$bg, $key: 'black-trans');
 
-  // main rest
+    .dis-3 {
+      width: ($px - 450);
+      margin-bottom: auto;
+
+      img {
+        width: $ptj;
+      }
+    }
+
+    .navbar {
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      .navbar-expand {
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+
+        a {
+          color: map-get($map:$color, $key: 'white');
+
+          &:hover {
+            color: map-get($map:$color, $key: 'gy');
+            transition: 500ms;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+  }
+
   .bg__head {
-    background-image: url(../d.png);
-    background-size: $ptj;
+    background-image: url(https://res.cloudinary.com/dgqkcp16g/image/upload/v1657636625/bg-general_mq8n9w.png);
+    background-size: 100%;
   }
 
   .bg__vh {
@@ -143,7 +146,7 @@
   }
 
   .bg__main-b {
-    background-color: map-get($map: $bgcolors, $key: 'bgmain');
+    background-color: map-get($map: $bg, $key: 'black-main');
   }
 
   .header {
@@ -151,8 +154,8 @@
     margin-block: ($px - 470);
     display: flex;
     justify-content: center;
-    background: linear-gradient(to bottom, map-get($map: $bgcolors, $key: 'bgheaderline1'), map-get($map: $bgcolors, $key: 'bgheaderline2'));
-    color: map-get($map: $colorf, $key: 'white');
+    background: linear-gradient(to bottom, map-get($map: $bg, $key: 'bgheaderline1'), map-get($map: $bg, $key: 'bgheaderline2'));
+    color: map-get($map: $color, $key: 'white');
 
     h1 {
       @media (max-width: 600px) {
@@ -480,7 +483,7 @@
       display: flex;
       justify-content: center;
       width: $ptj;
-      background-color: map-get($map: $bgcolors, $key: 'bgnav2');
+      background-color: map-get($map: $bg, $key: 'bgnav2');
       margin-top: ($px - 480);
 
       .navbar {
@@ -500,28 +503,28 @@
           }
 
           a {
-            color: map-get($map: $colorf, $key: 'white');
+            color: map-get($map: $color, $key: 'white');
 
             @media (max-width: 768px) {
               font-size: 1.5rem;
             }
 
             &:hover {
-              color: map-get($map: $colorf, $key: 'gy');
+              color: map-get($map: $color, $key: 'gy');
               transition: 500ms;
               font-weight: 500;
             }
           }
 
           .dropdown-menu {
-            background-color: map-get($map: $bgcolors, $key: 'bgdrop');
+            background-color: map-get($map: $bg, $key: 'bgdrop');
             border-radius: ($px - 495);
-            border: map-get($map: $bgcolors, $key: 'bgw') solid ($px - 499);
+            border: map-get($map: $bg, $key: 'bgw') solid ($px - 499);
             padding-block: ($px - 490);
 
             &:hover {
-              background-color: map-get($map: $bgcolors, $key: 'bgdrophover');
-              color: map-get($map: $colorf, $key: 'white');
+              background-color: map-get($map: $bg, $key: 'bgdrophover');
+              color: map-get($map: $color, $key: 'white');
             }
           }
         }
@@ -537,7 +540,7 @@
 
       h2 {
         text-align: justify;
-        color: map-get($map: $colorf, $key: 'white');
+        color: map-get($map: $color, $key: 'white');
         font-weight: 400;
         width: ($ptj - 20);
         align-self: center;
@@ -605,14 +608,14 @@
           img {
             width: $ptj;
             height: $ptj;
-            border: map-get($map: $bgcolors, $key: 'bgw') solid ($px - 499.90);
+            border: map-get($map: $bg, $key: 'bgw') solid ($px - 499.90);
           }
         }
 
         .card-body {
           padding: ($px - 450);
           width: ($ptj - 60);
-          border: map-get($map: $bgcolors, $key: 'bgw') solid ($px - 499.90);
+          border: map-get($map: $bg, $key: 'bgw') solid ($px - 499.90);
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -636,7 +639,7 @@
           }
 
           a {
-            color: map-get($map: $colorf, $key: 'white');
+            color: map-get($map: $color, $key: 'white');
             font-size: ($wv - 98.5);
             text-decoration: none;
             text-align: justify;
@@ -650,14 +653,14 @@
             }
 
             &:hover {
-              color: map-get($map: $colorf, $key: 'gy');
+              color: map-get($map: $color, $key: 'gy');
               font-weight: 500;
               transition-delay: 150ms;
             }
           }
 
           h3 {
-            color: map-get($map: $colorf, $key: 'white');
+            color: map-get($map: $color, $key: 'white');
             text-align: justify;
 
             @media (max-width: 991px) {
@@ -669,7 +672,7 @@
             }
 
             &:hover {
-              color: map-get($map: $colorf, $key: 'gy');
+              color: map-get($map: $color, $key: 'gy');
               font-weight: 500;
               transition-delay: 150ms;
             }
@@ -716,7 +719,7 @@
       }
 
       a {
-        color: map-get($map: $colorf, $key: 'white');
+        color: map-get($map: $color, $key: 'white');
         text-decoration: none;
         font-size: ($wv - 98.8);
 
@@ -746,7 +749,7 @@
         }
 
         &:hover {
-          color: map-get($map: $colorf, $key: 'gy');
+          color: map-get($map: $color, $key: 'gy');
           font-weight: 500;
           transition-delay: 300ms;
         }
@@ -755,10 +758,10 @@
 
     .section__index-w {
       @extend .section__index;
-      background-color: map-get($map: $bgcolors, $key: 'bgw');
+      background-color: map-get($map: $bg, $key: 'bgw');
 
       h2 {
-        color: map-get($map: $colorf, $key: 'black');
+        color: map-get($map: $color, $key: 'black');
       }
     }
 
@@ -766,17 +769,17 @@
       @extend .container__2;
 
       a {
-        color: map-get($map: $colorf, $key: 'black');
+        color: map-get($map: $color, $key: 'black');
 
         &:hover {
-          color: map-get($map: $colorf, $key: 'green');
+          color: map-get($map: $color, $key: 'green');
         }
       }
     }
 
     .section__index-b {
       @extend .section__index;
-      background-color: map-get($map: $bgcolors, $key: 'bgmain');
+      background-color: map-get($map: $bg, $key: 'bgmain');
 
     }
 
@@ -1184,7 +1187,7 @@
     justify-content: space-evenly;
     margin-top: auto;
     font-size: ($txtg - 0.6);
-    color: map-get($map: $colorf, $key: 'white');
+    color: map-get($map: $color, $key: 'white');
     overflow-x: hidden;
 
     @media (max-width: 991px) {
@@ -1214,7 +1217,7 @@
 
     h4 {
       margin-bottom: ($px - 480);
-      color: map-get($map: $colorf, $key: 'gy');
+      color: map-get($map: $color, $key: 'gy');
       align-self: center;
       width: 100%;
 
@@ -1260,7 +1263,7 @@
 
       address {
         font-style: normal;
-        color: map-get($map: $colorf, $key: 'gy');
+        color: map-get($map: $color, $key: 'gy');
 
         @media (max-width: 991px) {
           margin-block: 10px;
