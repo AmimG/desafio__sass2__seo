@@ -15,10 +15,11 @@
       text-decoration: none;
       width: auto;
 
-      span {
+      h1 {
         font-size: $txtg;
         font-family: $titlefonts;
         margin-left: ($px - 495);
+        margin-bottom: 0;
         color: map-get($map:$color, $key:'black', );
 
         &:hover {
@@ -38,7 +39,6 @@
 
       li {
         list-style: none;
-        align-self: center;
 
         a {
           font-size: ($txtg - .5);
@@ -83,7 +83,7 @@
 
     @media (max-width: 380px) {
       a {
-        span {
+        h1 {
           font-size: ($txtg - .5);
         }
       }
@@ -101,6 +101,7 @@
     @extend #nav;
     @include flex(space-around, center);
     margin-top: ($px - 480);
+    min-height: ($px - 440);
     max-height: none;
     background: map-get($map:$bg, $key: 'black-trans');
 
@@ -114,31 +115,108 @@
     }
 
     .navbar {
-      padding-top: 10px;
-      padding-bottom: 10px;
+      padding-top: ($px - 500);
+      padding-bottom: ($px - 500);
 
-      .navbar-expand {
-        padding: 0;
-        display: flex;
-        flex-direction: row;
+      ul {
+        padding: ($px - 500);
 
-        a {
-          color: map-get($map:$color, $key: 'white');
+        .nav-item {
+          margin-inline: ($px - 495);
+        }
 
-          &:hover {
-            color: map-get($map:$color, $key: 'gy');
-            transition: 500ms;
-            font-weight: 500;
+        .lis {
+          min-height: ($px - 440);
+          display: flex;
+
+          a {
+            color: map-get($map: $color, $key: 'white');
+            padding: ($px - 500);
+
+            &:hover {
+              color: map-get($map: $color, $key: 'gy');
+              transition: 500ms;
+              font-weight: 500;
+            }
           }
+        }
+
+        .dropdown-menu {
+          background-color: map-get($map: $bg, $key: 'black-main');
+          border: map-get($map: $color, $key: 'gy') ($px - 499.5) solid;
+          margin-top: ($px - 495);
+          padding-block: ($px - 490);
+          border-radius: ($px - 480);
+
+          li {
+            margin-inline: ($px - 490);
+
+            a {
+              &:hover {
+                background-color: map-get($map: $bg, $key: 'black-main');
+              }
+            }
+          }
+
         }
       }
     }
 
+    @media (max-width: 768px) {
+      min-height: ($px - 460);
+      max-height: ($px - 460);
+
+      .navbar {
+        padding-top: ($px - 490);
+        padding-bottom: ($px - 490);
+
+        ul {
+          .lis {
+            min-height: ($px - 460);
+            max-height: ($px - 460);
+          }
+        }
+      }
+
+      a {
+        font-size: ($txtg - .5);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        ul {
+          .nav-item {
+            margin-inline: ($px - 497.5);
+          }
+        }
+      }
+
+      .lis {
+        max-height: auto;
+      }
+
+      a {
+        font-size: ($txtg - .6);
+      }
+    }
+
+    @media (max-width: 380px) {
+      a {
+        font-size: ($txtg - .8);
+      }
+    }
+
+    @media (max-width: 320px) {
+      a {
+        font-size: ($txtg - 1);
+      }
+    }
   }
 
   .bg__head {
     background-image: url(https://res.cloudinary.com/dgqkcp16g/image/upload/v1657636625/bg-general_mq8n9w.png);
-    background-size: 100%;
+    background-size: $ptj;
   }
 
   .bg__vh {
@@ -150,21 +228,14 @@
   }
 
   .header {
+    @include flex(center, center);
     padding: ($px - 495);
     margin-block: ($px - 470);
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(to bottom, map-get($map: $bg, $key: 'bgheaderline1'), map-get($map: $bg, $key: 'bgheaderline2'));
+    background: linear-gradient(to bottom, map-get($map: $bg, $key: 'green-header-1'), map-get($map: $bg, $key: 'green-header-2'));
     color: map-get($map: $color, $key: 'white');
 
-    h1 {
-      @media (max-width: 600px) {
-        font-size: 3rem;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 2.5rem;
-      }
+    h2 {
+      font-size: ($txth2 + .5);
     }
 
     .header__div {
@@ -173,26 +244,32 @@
       overflow: hidden;
       width: auto;
     }
+
+    @media (max-width: 600px) {
+      h2 {
+        font-size: $txth2;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h2 {
+        font-size: ($txth2 - .5);
+      }
+    }
   }
 
   .main__ctc {
     width: auto;
-    display: flex;
+    @include flex(center, center);
     margin-bottom: ($px - 470);
 
     .section__ctc {
       width: $ptj;
-      display: flex;
-      flex-direction: column;
+      @include flex-column (column, none);
       padding: ($px - 490);
 
-      @media (max-width: 295px) {
-        padding: 0;
-      }
-
       .article__ctc {
-        display: flex;
-        flex-direction: column;
+        @include flex-column (column, none);
         padding: ($px - 490);
         margin-block: ($px - 490);
 
@@ -201,225 +278,74 @@
           align-self: center;
           margin-bottom: ($px - 490);
           font-weight: 600;
-          color: white;
+          color: map-get($map: $color, $key: 'white');
           font-weight: 400;
           width: ($ptj - 80);
-
-          @media (max-width: 1100px) {
-            width: 40%;
-          }
-
-          @media (max-width: 991px) {
-            width: auto;
-          }
         }
       }
 
       .form__ctc {
-        width: 100%;
-        height: auto;
+        width: $ptj;
         align-self: center;
-        display: flex;
-        flex-direction: column;
+        @include flex-column (column, none);
 
         .form__ctc2 {
-          width: 40%;
-          padding: 20px;
+          width: ($ptj - 60);
+          padding: ($px - 480);
           align-self: center;
-          display: flex;
-          flex-direction: column;
-          background: linear-gradient(to bottom, #009900, #006600);
-          border-radius: 20px;
-
-          @media (max-width: 1100px) {
-            width: 50%;
-          }
-
-          @media (max-width: 991px) {
-            width: 60%;
-          }
-
-          @media (max-width: 768px) {
-            width: 85%;
-          }
-
-          @media (max-width: 600px) {
-            width: 80%;
-          }
-
-          @media (max-width: 480px) {
-            width: 90%;
-            padding: 10px;
-          }
-
-          @media (max-width: 380px) {
-            width: 100%;
-          }
+          @include flex-column (column, none);
+          background: linear-gradient(to bottom, map-get($map:$bg, $key:'green-header-1'), map-get($map:$bg, $key:'green-header-2'));
+          border-radius: ($px - 480);
 
           .form__ctc3 {
             align-self: center;
-            width: 70%;
-            display: flex;
-            flex-direction: column;
-            color: white;
+            width: ($ptj - 30);
+            @include flex-column (column, none);
+            color: map-get($map: $color, $key: 'white');
             font-weight: 400;
+          }
 
-            @media (max-width: 768px) {
-              width: 80%;
-            }
+          label {
+            font-size: ($txtg - .5);
+            margin-bottom: ($px - 495);
+          }
 
-            @media (max-width: 295px) {
-              width: 95%;
-            }
+          input {
+            box-shadow: ($px - 497) ($px - 497) map-get($map: $color, $key: 'black');
+            margin-bottom: ($px - 490);
+            border: none;
+            border-radius: ($px - 480);
+          }
 
-            label {
-              font-size: 1.5rem;
-              margin-bottom: 5px;
-            }
-
-            input {
-              box-shadow: 3px 3px black;
-              margin-bottom: 10px;
-              border-style: none;
-              border-radius: 20px;
-            }
-
-            textarea {
-              box-shadow: 3px 3px black;
-              border-style: none;
-              margin-bottom: 10px;
-              max-width: 100%;
-              min-width: 100%;
-              max-height: 80%;
-              min-height: 60%;
-            }
+          textarea {
+            @extend input;
+            border-radius: ($px - 500);
+            max-width: $ptj;
+            min-width: $ptj;
+            max-height: ($ptj - 20);
+            min-height: ($ptj - 40);
           }
 
           .form__button {
-            display: flex;
-            justify-content: center;
+            @include flex(center, center);
 
             button {
-              font-size: 1.5rem;
-              border: none;
-              border-radius: 1.2rem;
-              height: 25px;
-              background-color: beige;
-              box-shadow: 3px 3px black;
+              @extend input;
+              margin-bottom: ($px - 500);
+              font-size: ($txtg - .5);
+              height: ($px - 475);
+              background-color: map-get($map: $bg, $key: 'white');
 
               &:hover {
-                background-color: rgb(23, 23, 253);
+                background-color: map-get($map: $bg, $key: 'blue');
                 transition: 300ms;
               }
 
               span {
-                margin: 25px;
+                margin: ($px - 475);
 
                 &:hover {
-                  color: white;
-                  transition: 300ms;
-                }
-              }
-            }
-
-          }
-        }
-
-
-        .form__perfil {
-          width: 35%;
-          padding: 20px;
-          align-self: center;
-          display: flex;
-          flex-direction: column;
-          background: linear-gradient(to bottom, #009900, #006600);
-          border-radius: 20px;
-
-          @media (max-width: 991px) {
-            width: 50%;
-          }
-
-          @media (max-width: 768px) {
-            width: 60%;
-          }
-
-          @media (max-width: 585px) {
-            width: 80%;
-          }
-
-          @media (max-width: 480px) {
-            width: 90%;
-            padding: 10px;
-          }
-
-          @media (max-width: 380px) {
-            width: 95%;
-          }
-
-          .form__img {
-            text-align: center;
-            margin-bottom: 10px;
-          }
-
-          .form__perfil2 {
-            align-self: center;
-            width: 70%;
-            display: flex;
-            flex-direction: column;
-            color: white;
-            font-weight: 400;
-            margin-bottom: 10px;
-            margin-top: 20px;
-
-            label {
-              text-align: justify;
-              font-size: 1.5rem;
-              margin-bottom: 5px;
-
-              @media (max-width: 380px) {
-                font-size: 1.2rem;
-              }
-            }
-
-            input {
-              box-shadow: 2px 2px black;
-              margin-bottom: 10px;
-              border-style: none;
-              border-radius: 20px;
-            }
-
-            .form__checkbox {
-              display: flex;
-
-              input {
-                margin-right: 5px;
-              }
-            }
-
-          }
-
-          .form__button {
-            display: flex;
-            justify-content: center;
-
-            button {
-              font-size: 1.5rem;
-              border: none;
-              border-radius: 1.2rem;
-              height: 25px;
-              background-color: beige;
-              box-shadow: 3px 3px black;
-
-              &:hover {
-                background-color: rgb(23, 23, 253);
-                transition: 300ms;
-              }
-
-              span {
-                margin: 25px;
-
-                &:hover {
-                  color: white;
+                  color: map-get($map: $bg, $key: 'white');
                   transition: 300ms;
                 }
               }
@@ -430,110 +356,171 @@
       }
 
       .form__addrs {
-        width: 40%;
-        padding: 20px;
+        width: ($ptj - 60);
+        padding: ($px - 480);
         align-self: center;
-        display: flex;
-        background: linear-gradient(to bottom, #009900, #006600);
-        border-radius: 20px;
+        @include flex-column (column, none);
+        background: linear-gradient(to bottom, map-get($map:$bg, $key:'green-header-1'), map-get($map:$bg, $key:'green-header-2'));
+        border-radius: ($px - 480);
         overflow: hidden;
 
-        @media (max-width: 1100px) {
-          width: 50%;
-        }
-
-        @media (max-width: 991px) {
-          width: 60%;
-        }
-
-        @media (max-width: 768px) {
-          width: 85%;
-        }
-
-        @media (max-width: 480px) {
-          width: 90%;
-        }
-
-        @media (max-width: 480px) {
-          width: 100%;
-          padding: 10px;
-        }
-
         .form__addrs2 {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          box-shadow: 2px 2px black;
-          border-radius: 20px;
+          width: $ptj;
+          @include flex-column (column, none);
+          box-shadow: ($px - 497) ($px - 497) map-get($map: $color, $key: 'black');
+          border-radius: ($px - 480);
 
           iframe {
-            border-radius: 20px;
+            border-radius: ($px - 480);
           }
+        }
+      }
+
+      .form__perfil {
+        @extend .form__addrs;
+        width: ($ptj - 65);
+
+        .form__img {
+          text-align: center;
+          margin-bottom: ($px - 490);
+        }
+
+        .form__perfil2 {
+          width: ($ptj - 30);
+          align-self: center;
+          @include flex-column (column, none);
+          color: map-get($map: $color, $key: 'white');
+          font-weight: 400;
+          margin-bottom: ($px - 490);
+          margin-top: ($px - 480);
+
+          label {
+            text-align: justify;
+            font-size: ($txtg - .5);
+            margin-bottom: ($px - 495);
+          }
+
+          input {
+            box-shadow: ($px - 497) ($px - 497) map-get($map: $color, $key: 'black');
+            margin-bottom: ($px - 490);
+            border: none;
+            border-radius: ($px - 480);
+          }
+
+          .form__checkbox {
+            display: flex;
+
+            input {
+              margin-right: ($px - 495);
+            }
+          }
+        }
+
+        .form__button {
+          display: flex;
+          justify-content: center;
+
+          button {
+            font-size: 1.5rem;
+            box-shadow: ($px - 497) ($px - 497) map-get($map: $color, $key: 'black');
+            height: ($px - 475);
+            border: none;
+            border-radius: ($px - 480);
+            background-color: map-get($map: $bg, $key: 'white');
+
+            &:hover {
+              color: map-get($map: $bg, $key: 'blue');
+              transition: 300ms;
+            }
+
+            span {
+              margin: ($px - 475);
+
+              &:hover {
+                color: map-get($map: $bg, $key: 'white');
+                transition: 300ms;
+              }
+            }
+          }
+        }
+      }
+
+      @media (max-width: 1100px) {
+        .article__ctc h3 {
+          width: ($ptj - 60);
+        }
+
+        .form__ctc .form__ctc2,
+        .form__addrs {
+          width: ($ptj - 50);
+        }
+      }
+
+      @media (max-width: 991px) {
+        .article__ctc h3 {
+          width: auto;
+        }
+
+        .form__ctc .form__ctc2,
+        .form__addrs {
+          width: ($ptj - 40);
+        }
+      }
+
+      @media (max-width: 768px) {
+
+        .form__ctc .form__ctc2,
+        .form__addrs {
+          width: ($ptj - 15);
+        }
+
+        .form__ctc .form__ctc2 .form__ctc3 {
+          width: ($ptj - 20);
+        }
+      }
+
+      @media (max-width: 600px) {
+
+        .form__ctc .form__ctc2,
+        .form__addrs {
+          width: ($ptj - 20);
+        }
+      }
+
+      @media (max-width: 480px) {
+
+        .form__ctc .form__ctc2,
+        .form__addrs {
+          width: ($ptj - 10);
+          padding: ($px - 490);
+        }
+      }
+
+      @media (max-width: 380px) {
+
+        .form__ctc .form__ctc2,
+        .form__addrs {
+          width: $ptj;
+        }
+      }
+
+      @media (max-width: 295px) {
+        padding: 0;
+
+        .form__ctc .form__ctc2 .form__ctc3 {
+          width: ($ptj - 5);
         }
       }
     }
   }
 
   .bg__main {
-    display: flex;
-    flex-direction: column;
+    @include flex-column(column, none);
+    width: $ptj;
 
     //nav secundaria
-    #nav2 {
-      display: flex;
-      justify-content: center;
-      width: $ptj;
-      background-color: map-get($map: $bg, $key: 'bgnav2');
-      margin-top: ($px - 480);
-
-      .navbar {
-        padding-top: ($px - 490);
-        padding-bottom: ($px - 490);
-
-        @media (max-width: 768px) {
-          padding-top: 5px;
-          padding-bottom: 5px;
-        }
-
-        ul {
-          padding: ($px - 500);
-
-          .nav-item {
-            margin-inline: ($px - 495);
-          }
-
-          a {
-            color: map-get($map: $color, $key: 'white');
-
-            @media (max-width: 768px) {
-              font-size: 1.5rem;
-            }
-
-            &:hover {
-              color: map-get($map: $color, $key: 'gy');
-              transition: 500ms;
-              font-weight: 500;
-            }
-          }
-
-          .dropdown-menu {
-            background-color: map-get($map: $bg, $key: 'bgdrop');
-            border-radius: ($px - 495);
-            border: map-get($map: $bg, $key: 'bgw') solid ($px - 499);
-            padding-block: ($px - 490);
-
-            &:hover {
-              background-color: map-get($map: $bg, $key: 'bgdrophover');
-              color: map-get($map: $color, $key: 'white');
-            }
-          }
-        }
-      }
-    }
-
     .section__index {
-      display: flex;
-      flex-direction: column;
+      @include flex-column(column, none);
       align-self: center;
       padding: ($px - 490);
       width: $ptj;
@@ -546,17 +533,26 @@
         align-self: center;
         font-size: $txtg;
         margin-bottom: ($px - 485);
+      }
+    }
 
-        @media (max-width: 991px) {
-          width: 90%;
-        }
+    @media (max-width: 991px) {
+      .section__index h2 {
+        width: ($ptj - 10);
+      }
+    }
 
-        @media (max-width: 768px) {
-          width: auto;
-          font-size: 3.5vw;
-          text-align: center;
-        }
+    @media (max-width: 768px) {
+      .section__index h2 {
+        font-size: ($txtg - .2);
+        width: auto;
+        text-align: center;
+      }
+    }
 
+    @media (max-width: 400px) {
+      .section__index h2 {
+        font-size: ($txtg - .5);
       }
     }
 
@@ -565,92 +561,36 @@
       display: flex;
       align-self: center;
 
-      @media (max-width: 991px) {
-        width: 90%;
-      }
-
       .carousel-item div {
         text-align: center;
-
-        a {
-          @media (max-width: 768px) {
-            font-size: 1.8vw;
-          }
-        }
       }
 
       .card {
-        flex-flow: row;
+        @include flex-column(row, none);
         border: ($px - 500);
-        background-color: transparent;
-
-        @media (max-width: 585px) {
-          display: flex;
-          flex-direction: column;
-          align-self: center;
-        }
+        background-color: map-get($map: $bg, $key: 'black-trans');
 
         .card__div {
           width: ($ptj - 40);
 
-          @media (max-width: 991px) {
-            width: 65%;
-          }
-
-          @media (max-width: 768px) {
-            width: 60%;
-          }
-
-          @media (max-width: 585px) {
-            width: 100%;
-          }
-
           img {
             width: $ptj;
-            height: $ptj;
-            border: map-get($map: $bg, $key: 'bgw') solid ($px - 499.90);
+            border: map-get($map: $color, $key: 'gy') solid ($px - 499.90);
           }
         }
 
         .card-body {
-          padding: ($px - 450);
+          padding: ($px - 465);
           width: ($ptj - 60);
-          border: map-get($map: $bg, $key: 'bgw') solid ($px - 499.90);
-          display: flex;
-          flex-direction: column;
+          border: map-get($map: $color, $key: 'gy') solid ($px - 499.90);
+          @include flex-column(column, none);
           justify-content: center;
-
-          @media (max-width: 991px) {
-            padding: 30px;
-            width: 35%;
-          }
-
-          @media (max-width: 768px) {
-            padding: 0;
-            padding-inline: 25px;
-            width: 40%;
-          }
-
-          @media (max-width: 585px) {
-            border-top: none;
-            width: 100%;
-            padding-inline: 0;
-            padding: 20px;
-          }
 
           a {
             color: map-get($map: $color, $key: 'white');
-            font-size: ($wv - 98.5);
+            font-size: $txtg;
             text-decoration: none;
             text-align: justify;
-
-            @media (max-width: 480px) {
-              font-size: 1.5rem;
-            }
-
-            @media (max-width: 295px) {
-              font-size: 0.9rem;
-            }
 
             &:hover {
               color: map-get($map: $color, $key: 'gy');
@@ -662,14 +602,7 @@
           h3 {
             color: map-get($map: $color, $key: 'white');
             text-align: justify;
-
-            @media (max-width: 991px) {
-              font-size: 3vw;
-            }
-
-            @media (max-width: 295px) {
-              font-size: 1.1 rem;
-            }
+            margin-bottom: ($px - 490);
 
             &:hover {
               color: map-get($map: $color, $key: 'gy');
@@ -684,34 +617,122 @@
       .carousel-control-prev {
         width: ($ptj - 95);
       }
+
+      @media (max-width: 1170px) {
+        .card .card-body a {
+          font-size: ($txtg - .2);
+        }
+
+        .card .card-body h3 {
+          font-size: $txtg;
+        }
+      }
+
+      @media (max-width: 991px) {
+        width: ($ptj - 10);
+
+        .card .card__div {
+          width: ($ptj - 40);
+        }
+
+        .card .card-body {
+          padding: ($px - 470);
+        }
+      }
+
+      @media (max-width: 850px) {
+        .card .card-body a {
+          font-size: ($txtg - .4);
+        }
+
+        .card .card-body h3 {
+          font-size: ($txtg - .2);
+        }
+      }
+
+      @media (max-width: 785px) {
+        .card .card-body {
+          padding: ($px - 500);
+          padding-inline: ($px - 480);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .card .card-body a {
+          font-size: ($txtg - .6);
+        }
+
+        .card .card-body h3 {
+          font-size: ($txtg - .4);
+        }
+      }
+
+      @media (max-width: 690px) {
+        .card .card-body a {
+          font-size: ($txtg - .8);
+        }
+
+        .card .card-body h3 {
+          font-size: ($txtg - .6);
+        }
+      }
+
+      @media (max-width: 585px) {
+        .card {
+          @include flex-column(column, none);
+          align-self: center;
+        }
+
+        .card .card__div {
+          width: $ptj;
+        }
+
+        .card .card-body {
+          padding: ($px - 495);
+          width: $ptj;
+          height: ($px - 380);
+        }
+
+        .carousel-control-next,
+        .carousel-control-prev {
+          height: ($ptj - 30);
+        }
+
+        .card .card-body a {
+          font-size: ($txtg - .6);
+        }
+
+        .card .card-body h3 {
+          font-size: ($txtg - .4);
+        }
+      }
+
+      @media (max-width: 400px) {
+        .card .card-body {
+          height: ($px - 400);
+        }
+      }
+
+      @media (max-width: 380px) {
+        .card .card-body a {
+          font-size: ($txtg - .9);
+        }
+
+        .card .card-body h3 {
+          font-size: ($txtg - .6);
+        }
+      }
     }
 
     .container__2 {
       margin-top: ($px - 490);
       width: ($ptj - 20);
-      display: flex;
-      justify-content: space-between;
+      @include flex(space-between, none);
       align-self: center;
       text-align: center;
 
-      @media (max-width: 991px) {
-        width: 90%;
-      }
-
-      @media (max-width: 585px) {
-        display: flex;
-        flex-direction: column;
-      }
-
       div {
         width: ($ptj - 78);
-
-        @media (max-width: 585px) {
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-          margin-block: 5px;
-        }
 
         img {
           width: $ptj;
@@ -721,32 +742,7 @@
       a {
         color: map-get($map: $color, $key: 'white');
         text-decoration: none;
-        font-size: ($wv - 98.8);
-
-        @media (max-width: 991px) {
-          font-size: 1.5vw;
-        }
-
-        @media (max-width: 768px) {
-          color: white;
-          text-decoration: none;
-          font-size: 1.8vw;
-        }
-
-        @media (max-width: 585px) {
-          width: 60%;
-          align-self: center;
-          margin-inline: 5px;
-          text-align: justify;
-        }
-
-        @media (max-width: 480px) {
-          font-size: 1.2rem;
-        }
-
-        @media (max-width: 295px) {
-          font-size: 0.7rem;
-        }
+        font-size: ($txtg - .2);
 
         &:hover {
           color: map-get($map: $color, $key: 'gy');
@@ -754,14 +750,94 @@
           transition-delay: 300ms;
         }
       }
+
+      @media (max-width: 1330px) {
+        a {
+          font-size: ($txtg - .6);
+        }
+      }
+
+      @media (max-width: 1035px) {
+        a {
+          font-size: ($txtg - .8);
+        }
+      }
+
+      @media (max-width: 991px) {
+        width: ($ptj - 10);
+
+        a {
+          font-size: ($txtg - .9);
+        }
+      }
+
+      @media (max-width: 730px) {
+        a {
+          font-size: ($txtg - 1);
+        }
+      }
+
+      @media (max-width: 670px) {
+        a {
+          font-size: ($txtg - 1.1);
+        }
+      }
+
+      @media (max-width: 600px) {
+        a {
+          font-size: ($txtg - 1.15);
+        }
+      }
+
+      @media (max-width: 585px) {
+        @include flex-column(column, none);
+
+        div {
+          @include flex(space-between, none);
+          width: $ptj;
+          margin-block: ($px - 495);
+        }
+
+        a {
+          width: ($ptj - 40);
+          align-self: center;
+          margin-inline: ($px - 495);
+          font-size: ($txtg - .5);
+          text-align: justify;
+        }
+      }
+
+      @media (max-width: 480px) {
+        a {
+          font-size: ($txtg - .8);
+        }
+      }
+
+      @media (max-width: 385px) {
+        a {
+          font-size: ($txtg - 1);
+        }
+      }
+
+      @media (max-width: 330px) {
+        a {
+          font-size: ($txtg - 1.2);
+        }
+      }
+
+      @media (max-width: 275px) {
+        a {
+          font-size: ($txtg - 1.3);
+        }
+      }
     }
 
     .section__index-w {
       @extend .section__index;
-      background-color: map-get($map: $bg, $key: 'bgw');
+      background-color: map-get($map: $bg, $key: 'grey-main');
 
       h2 {
-        color: map-get($map: $color, $key: 'black');
+        color: map-get($map: $color, $key: 'green');
       }
     }
 
@@ -769,10 +845,10 @@
       @extend .container__2;
 
       a {
-        color: map-get($map: $color, $key: 'black');
+        color: map-get($map: $color, $key: 'green');
 
         &:hover {
-          color: map-get($map: $color, $key: 'green');
+          color: map-get($map: $color, $key: 'yellow');
         }
       }
     }
@@ -784,391 +860,300 @@
     }
 
     .section__rsl {
-      display: flex;
-      flex-direction: column;
-      padding: 10px;
-      margin-bottom: 40px;
-      width: 100%;
+      @include flex-column(column, none);
+      padding: ($px - 490);
+      margin-bottom: ($px - 460);
+      width: $ptj;
 
       .rsl__ttl {
-        width: 80%;
+        width: ($ptj - 20);
         display: flex;
         align-self: center;
-
-        @media (max-width: 991px) {
-          width: 95%;
-        }
-
-        @media (max-width: 768px) {
-          width: 100%;
-        }
-
-        @media (max-width: 600px) {
-          width: 95%;
-        }
-
-        @media (max-width: 585px) {
-          width: 90%;
-        }
       }
 
       .rsl__ttl2 {
         text-align: justify;
 
         h2 {
-          color: white;
-          font-size: 1.6rem;
-          margin-bottom: 1px;
+          color: map-get($map: $color, $key: 'white');
+          font-size: ($txtg - .4);
+          margin-bottom: ($px - 499);
         }
 
         span {
-          color: white;
-          font-size: 1.4rem;
+          color: map-get($map: $color, $key: 'white');
+          font-size: ($txtg - .6);
         }
+      }
 
+      @media (max-width: 991px) {
+        .rsl__ttl {
+          width: ($ptj - 5);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .rsl__ttl {
+          width: $ptj;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .rsl__ttl {
+          width: ($ptj - 5);
+        }
+      }
+
+      @media (max-width: 585px) {
+        .rsl__ttl {
+          width: ($ptj - 10);
+        }
       }
     }
 
     .rsl__div {
-      width: 80%;
-      display: flex;
-      justify-content: space-evenly;
+      width: ($ptj - 20);
       align-self: center;
-      background: linear-gradient(to bottom, #009900, #006600);
-      box-shadow: 2px 2px black;
-      border-radius: 20px;
+      @include flex (space-evenly, none);
+      background: linear-gradient(to bottom, map-get($map:$bg, $key:'green-header-1'), map-get($map:$bg, $key:'green-header-2'));
+      border-radius: ($px - 480);
+
+      .rsl__div2 {
+        @include flex-column (column, none);
+        width: ($ptj - 70);
+        padding: ($px - 490);
+        margin-block: ($px - 490);
+        background: linear-gradient(to bottom, map-get($map:$bg, $key:'green-rsl-1'), map-get($map:$bg, $key:'green-rsl-2'));
+        border-radius: ($px - 480);
+        box-shadow: ($px - 497) ($px - 497) map-get($map: $color, $key: 'black');
+
+        .rsl__div3 {
+          @include flex(space-between, center);
+          width: ($ptj - 20);
+          align-self: center;
+          overflow: hidden;
+          margin-block: ($px - 495);
+
+          span {
+            color: map-get($map: $color, $key: 'white');
+            font-weight: 400;
+            font-size: ($txtg - .8);
+          }
+        }
+      }
 
       @media (max-width: 991px) {
-        width: 95%;
+        width: ($ptj - 5);
       }
 
       @media (max-width: 768px) {
-        width: 100%;
+        width: $ptj;
+
+        .rsl__div2 {
+          width: ($ptj - 68);
+          padding: ($px - 495);
+          margin-block: ($px - 495);
+        }
+
+        .rsl__div3 {
+          width: $ptj;
+        }
       }
 
       @media (max-width: 600px) {
-        width: 98%;
+        width: ($ptj - 2);
+
+        span {
+          text-align: center;
+          align-self: center;
+        }
       }
 
       @media (max-width: 585px) {
-        width: 90%;
-        display: flex;
-        flex-direction: column;
-      }
+        width: ($ptj - 10);
+        @include flex-column (column, none);
 
-      .rsl__div2 {
-        display: flex;
-        flex-direction: column;
-        width: 30%;
-        padding: 10px;
-        margin-block: 10px;
-        background: linear-gradient(to bottom, #2cff2c, #288b28);
-        box-shadow: 2px 2px black;
-        border-radius: 20px;
-
-        @media (max-width: 768px) {
-          width: 32%;
-          padding: 5px;
-          margin-block: 5px;
-        }
-
-        @media (max-width: 585px) {
-          width: 90%;
+        .rsl__div2 {
+          width: ($ptj - 10);
           align-self: center;
         }
 
         .rsl__div3 {
-          width: 80%;
-          display: flex;
-          align-self: center;
-          align-items: center;
-          justify-content: space-between;
-          overflow: hidden;
-          margin-block: 5px;
-
-          @media (max-width: 768px) {
-            width: 100%;
-          }
-
-          @media (max-width: 585px) {
-            width: 80%;
-            display: flex;
-            align-self: center;
-            align-items: center;
-            justify-content: space-between;
-            overflow: hidden;
-            margin-block: 5px;
-          }
-
-          span {
-            color: white;
-            font-weight: 400;
-            font-size: 1.2rem;
-
-            @media (max-width: 600px) {
-              text-align: center;
-              align-self: center;
-
-            }
-
-            @media (max-width: 585px) {
-              color: white;
-              font-weight: 400;
-              font-size: 1.2rem;
-            }
-          }
+          width: ($ptj - 20);
         }
       }
     }
   }
 
   .section__about-br {
-    display: flex;
-    flex-direction: column;
+    @include flex-column(column, none);
     align-self: center;
-    margin-block: 20px;
-    padding: 10px;
-    width: 100%;
-    background-color: rgb(2, 2, 2);
+    margin-block: ($px - 480);
+    padding: ($px - 490);
+    width: $ptj;
 
     h2 {
       text-align: end;
-      color: rgb(240, 240, 240);
-      font-weight: 400;
-      width: 80%;
       align-self: center;
-      font-size: 3rem;
-      margin-right: 30px;
-      margin-bottom: 15px;
-
-      @media (max-width: 991px) {
-        font-size: 2rem;
-      }
-
-      @media (max-width: 768px) {
-        font-size: 1.8rem;
-      }
-
-      @media (max-width: 585px) {
-        text-align: center;
-        align-self: center;
-        font-size: 3rem;
-        margin-right: 0;
-      }
-
-      @media (max-width: 380px) {
-        font-size: 2rem;
-      }
+      color: map-get($map: $color, $key: 'white');
+      font-weight: 400;
+      width: ($ptj - 20);
+      margin-right: ($px - 470);
+      margin-bottom: ($px - 485);
     }
 
     .container__4 {
-      width: 80%;
-      display: flex;
-      justify-content: space-between;
+      width: ($ptj - 20);
+      @include flex(space-between, none);
       align-self: center;
 
-      @media (max-width: 585px) {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-self: center;
-      }
-
       div {
-        width: 45%;
+        width: ($ptj - 55);
         display: flex;
-        border-radius: 20px;
-        box-shadow: 2px 2px greenyellow;
-
-        @media (max-width: 768px) {
-          width: 48%;
-        }
-
-        @media (max-width: 585px) {
-          align-self: center;
-          width: 80%;
-          margin-bottom: 20px;
-        }
-
+        border-radius: ($px - 480);
+        box-shadow: ($px - 497) ($px - 497) map-get($map: $color, $key: 'gy');
       }
 
       img {
-        width: 100%;
-        border-radius: 20px;
+        width: $ptj;
+        border-radius: ($px - 480);
       }
 
       .div__p {
-        padding-inline: 20px;
-        background-color: rgba(43, 43, 43, 0.244);
-
-        @media (max-width: 585px) {
-          min-height: 80%;
-          height: 203.4px;
-        }
+        padding-inline: ($px - 480);
+        background-color: map-get($map: $bg, $key: 'grey-main');
 
         p {
-          color: white;
+          color: map-get($map: $color, $key: 'white');
           text-align: justify;
           align-self: center;
-          font-size: 2rem;
-
-          @media (max-width: 1100px) {
-            font-size: 1.7rem;
-          }
-
-          @media (max-width: 991px) {
-            font-size: 1.3rem;
-          }
-
-          @media (max-width: 768px) {
-            font-size: 1.2rem;
-          }
-
-          @media (max-width: 585px) {
-            font-size: 1.8rem;
-          }
-
-          @media (max-width: 380px) {
-            font-size: 1.5rem;
-          }
-
-          @media (max-width: 295px) {
-            font-size: 1.2rem;
-          }
+          font-size: $txtg;
         }
       }
 
       .dd {
         display: none;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .container__4 {
+        .div__p {
+          p {
+            font-size: ($txtg - .3);
+          }
+        }
+      }
+    }
+
+    @media (max-width: 991px) {
+      h2 {
+        font-size: $txtg;
+      }
+
+      .container__4 {
+        .div__p {
+          p {
+            font-size: ($txtg - .7);
+          }
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      h2 {
+        font-size: ($txtg - .2);
+      }
+
+      .container__4 {
+        div {
+          width: ($ptj - 52);
+
+          p {
+            font-size: ($txtg - .8);
+          }
+        }
+      }
+    }
+
+    @media (max-width: 585px) {
+      h2 {
+        text-align: center;
+        align-self: center;
+        font-size: $txth2;
+        margin-right: ($px - 500);
+        margin-left: ($px - 500);
+      }
+
+      .container__4 {
+        @include flex-column(column, none);
+        justify-content: center;
+        align-self: center;
+        width: $ptj;
+
+        div {
+          width: ($ptj - 20);
+          align-self: center;
+          margin-bottom: ($px - 480);
+        }
+
+        .div__p {
+          min-height: ($ptj - 20);
+          height: ($px - 296.6);
+
+          p {
+            font-size: ($txtg - .2);
+          }
+        }
+      }
+    }
+
+    @media (max-width: 380px) {
+      h2 {
+        font-size: $txtg;
+      }
+
+      .container__4 {
+        .div__p {
+          p {
+            font-size: ($txtg - .5);
+          }
+        }
+      }
+    }
+
+    @media (max-width: 295px) {
+      .container__4 {
+        .div__p {
+          p {
+            font-size: ($txtg - .8);
+          }
+        }
       }
     }
   }
 
   .section__about-b {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    margin-block: 20px;
-    padding: 10px;
-    width: 100%;
-    background-color: rgb(2, 2, 2);
+    @extend .section__about-br;
 
     h2 {
       text-align: justify;
-      color: rgb(240, 240, 240);
-      font-weight: 400;
-      width: 80%;
-      align-self: center;
-      font-size: 3rem;
-      margin-left: 30px;
-      margin-bottom: 15px;
-
-      @media (max-width: 991px) {
-        font-size: 2rem;
-      }
-
-      @media (max-width: 768px) {
-        font-size: 1.8rem;
-      }
-
-      @media (max-width: 585px) {
-        text-align: center;
-        align-self: center;
-        font-size: 3rem;
-        margin-left: 0;
-      }
-
-      @media (max-width: 380px) {
-        font-size: 2rem;
-      }
+      margin-left: ($px - 470);
+      margin-right: ($px - 500);
     }
 
-    .container__4 {
-      width: 80%;
-      display: flex;
-      justify-content: space-between;
-      align-self: center;
+    @media (max-width: 585px) {
+      h2 {
+        text-align: center;
+        margin-left: ($px - 500);
+      }
 
-      @media (max-width: 585px) {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-self: center;
-
+      .container__4 {
         .dn {
           display: none;
         }
-      }
 
-      div {
-        width: 45%;
-        display: flex;
-        border-radius: 20px;
-        box-shadow: 2px 2px greenyellow;
-
-        @media (max-width: 768px) {
-          width: 48%;
-        }
-
-        @media (max-width: 585px) {
-          align-self: center;
-          width: 80%;
-          margin-bottom: 20px;
-        }
-      }
-
-      img {
-        width: 100%;
-        border-radius: 20px;
-      }
-
-      .div__p {
-        padding-inline: 20px;
-        background-color: rgba(43, 43, 43, 0.244);
-
-        @media (max-width: 585px) {
-          min-height: 80%;
-          height: 203.4px;
-        }
-
-        p {
-          color: white;
-          text-align: justify;
-          align-self: center;
-          font-size: 2rem;
-
-          @media (max-width: 1100px) {
-            font-size: 1.7rem;
-          }
-
-          @media (max-width: 991px) {
-            font-size: 1.3rem;
-          }
-
-          @media (max-width: 768px) {
-            font-size: 1.2rem;
-          }
-
-          @media (max-width: 585px) {
-            font-size: 1.8rem;
-          }
-
-          @media (max-width: 380px) {
-            font-size: 1.5rem;
-          }
-
-          @media (max-width: 295px) {
-            font-size: 1.2rem;
-          }
-        }
-      }
-
-      .dd {
-        display: none;
-
-        @media (max-width: 585px) {
+        .dd {
           display: flex;
         }
       }
@@ -1177,66 +1162,22 @@
 
   // footer general
   .footer {
-    width: auto;
+    @include flex(space-evenly, none);
+    margin-top: auto;
     bottom: ($px - 500);
-    background-image: url(https://img.uefa.com/imgml/uefacom/uefaeuropaconferenceleague/2020/stats/stats-bg-head-l.png);
-    background-size: $ptj;
     padding-top: ($px - 490);
     padding-bottom: ($px - 490);
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: auto;
     font-size: ($txtg - 0.6);
     color: map-get($map: $color, $key: 'white');
     overflow-x: hidden;
-
-    @media (max-width: 991px) {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      grid-template-areas:
-        "addrs redes redes"
-        "addrs fnav legal";
-    }
-
-    @media (max-width: 733px) {
-      padding-top: 0;
-      padding-bottom: 0;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-areas:
-        "addrs fnav"
-        "redes legal";
-    }
-
-    @media (max-width: 585px) {
-      display: flex;
-      flex-direction: column;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
+    background-image: url(https://res.cloudinary.com/dgqkcp16g/image/upload/v1657636625/bg-general_mq8n9w.png);
+    background-size: $ptj;
 
     h4 {
       margin-bottom: ($px - 480);
       color: map-get($map: $color, $key: 'gy');
       align-self: center;
-      width: 100%;
-
-      @media (max-width: 991px) {
-        font-size: 2rem;
-        width: 100%;
-        text-align: center;
-        align-self: center;
-      }
-
-      @media (max-width: 733px) {
-        margin-bottom: auto;
-      }
-
-      @media (max-width: 585px) {
-        margin-bottom: 5px;
-        font-size: 2rem;
-        border-bottom: green solid 1px;
-      }
+      width: $ptj;
     }
 
     .footer__addrs {
@@ -1244,176 +1185,43 @@
       text-align: center;
       padding: ($px - 480);
 
-      @media (max-width: 991px) {
-        grid-area: addrs;
-        width: 100%;
-        align-self: center;
-      }
-
-      @media (max-width: 733px) {
-        width: 100%;
-        align-self: center;
-        border-right: green solid 1px;
-      }
-
-      @media (max-width: 585px) {
-        padding: 5px;
-        border: none;
-      }
-
       address {
         font-style: normal;
         color: map-get($map: $color, $key: 'gy');
-
-        @media (max-width: 991px) {
-          margin-block: 10px;
-        }
-
-        @media (max-width: 585px) {
-          display: none;
-        }
       }
     }
 
     .footer__redes {
       @extend .footer__addrs;
+      @include flex-column(column, none);
       padding: ($px - 490);
-      display: flex;
-      flex-direction: column;
-
-      @media (max-width: 991px) {
-        grid-area: redes;
-        width: 90%;
-        text-align: center;
-        margin-inline: auto;
-        padding: 10px;
-        display: flex;
-        flex-flow: wrap;
-      }
-
-      @media (max-width: 733px) {
-        grid-area: redes;
-        width: 100%;
-        height: 100%;
-        padding: 20px;
-        display: flex;
-        border-right: green solid 1px;
-        border-bottom: none;
-      }
-
-      @media (max-width: 585px) {
-        width: auto;
-        display: flex;
-        justify-content: space-between;
-        border: none;
-
-        h4 {
-          display: none;
-        }
-      }
-
 
       .div__redes {
         height: ($ptj - 70);
         display: flex;
         justify-content: center;
 
-        @media (max-width: 991px) {
-          width: auto;
-          display: flex;
-          justify-content: center;
-          margin-bottom: 0px;
-        }
-
-        @media (max-width: 733px) {
-          width: 100%;
-        }
-
-        @media (max-width: 585px) {
-          width: 50%;
-          height: 10%;
-          margin-bottom: 0px;
-        }
-
-        @media (max-width: 295px) {
-          width: auto;
-        }
-
-
         a {
           align-self: center;
           text-decoration: none;
           margin-inline: ($px - 490);
-
-          @media (max-width: 991px) {
-            margin-inline: 5px;
-          }
-
-          @media (max-width: 585px) {
-            margin-inline: 5px;
-          }
-
-          @media (max-width: 295px) {
-            margin-inline: 3px;
-          }
         }
       }
 
       .ms-auto,
       .me-auto {
         margin-inline: auto;
-
-        @media (max-width: 991px) {
-          margin-inline: 0;
-        }
-
-        @media (max-width: 733px) {
-          margin-inline: auto;
-        }
-
-        @media (max-width: 585px) {
-          margin-inline: 0;
-        }
-
-        @media (max-width: 295px) {
-          margin-inline: auto;
-        }
       }
     }
 
     .footer__nav {
-      padding-left: 0;
+      padding-left: ($px - 500);
       @extend .footer__addrs;
       padding: ($px - 490);
-
-      @media (max-width: 991px) {
-        grid-area: fnav;
-        width: 100%;
-      }
-
-      @media (max-width: 733px) {
-        grid-area: fnav;
-        width: 100%;
-        height: 100%;
-        padding: 20px;
-        border: none;
-      }
 
       ul {
         margin-top: ($px - 460);
         padding-left: ($px - 500);
-
-        @media (max-width: 991px) {
-          margin-top: 0px;
-        }
-
-        @media (max-width: 733px) {
-          margin-top: 40px;
-        }
-
-        @media (max-width: 585px) {
-          margin-top: 0;
-        }
 
         li {
           list-style: none;
@@ -1423,10 +1231,6 @@
             text-decoration: none;
             color: white;
             font-size: ($txtg - 0.6);
-
-            @media (max-width: 585px) {
-              font-size: 1.5rem;
-            }
 
             &:hover {
               color: yellow;
@@ -1442,52 +1246,227 @@
       @extend .footer__addrs;
       padding: ($px - 490);
 
-      @media (max-width: 991px) {
-        grid-area: legal;
-        width: 100%;
-      }
-
-      @media (max-width: 733px) {
-        grid-area: legal;
-        width: 100%;
-        height: 100%;
-        padding: 0;
-        padding: 20px;
-        border: none;
-      }
-
       div {
         max-height: $px;
         max-width: ($px + 400);
         margin-inline: auto;
         margin-top: ($px - 460);
 
-        @media (max-width: 991px) {
-          margin-top: 0px;
-        }
-
-        @media (max-width: 733px) {
-          margin-top: 40px;
-          max-width: 300px;
-        }
-
-        @media (max-width: 585px) {
-          margin-top: 0;
-        }
-
         span {
           font-size: ($txtg - 0.6);
+        }
+      }
+    }
 
-          @media (max-width: 768px) {
-            font-size: 1.2rem;
+    @media (max-width: 991px) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-areas:
+        "addrs redes redes"
+        "addrs fnav legal";
+
+      h4 {
+        text-align: center;
+      }
+
+      .footer__addrs {
+        grid-area: addrs;
+        width: $ptj;
+        align-self: center;
+
+        address {
+          margin-block: ($px - 490);
+        }
+      }
+
+      .footer__redes {
+        grid-area: redes;
+        width: ($ptj - 10);
+        margin-inline: auto;
+        display: flex;
+        flex-flow: wrap;
+
+        .div__redes {
+          @include flex(center, none);
+          width: auto;
+          margin-bottom: ($px - 500);
+
+          a {
+            margin-inline: ($px - 495);
           }
+        }
+      }
 
-          @media (max-width: 733px) {
-            font-size: 1.4rem;
+      .footer__nav {
+        grid-area: fnav;
+        width: $ptj;
+
+        ul {
+          margin-top: ($px - 500);
+        }
+      }
+
+      .footer__legal {
+        grid-area: legal;
+        width: $ptj;
+
+        div {
+          margin-top: ($px - 500);
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .footer__legal {
+        div {
+          span {
+            font-size: ($txtg - 0.8);
           }
+        }
+      }
+    }
 
-          @media (max-width: 585px) {
-            font-size: 1.5rem;
+    @media (max-width: 733px) {
+      padding-top: ($px - 500);
+      padding-bottom: ($px - 500);
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "addrs fnav"
+        "redes legal";
+
+      h4 {
+        margin-bottom: auto;
+      }
+
+      .footer__addrs {
+        border-right: map-get($map: $color, $key: 'green') solid ($px - 499);
+      }
+
+      .footer__redes {
+        width: $ptj;
+        height: $ptj;
+        padding: ($px - 480);
+        display: flex;
+
+        .div__redes {
+          width: $ptj;
+        }
+      }
+
+      .footer__nav {
+        grid-area: fnav;
+        width: $ptj;
+        height: $ptj;
+        border: none;
+        padding: ($px - 480);
+
+        ul {
+          margin-top: ($px - 460);
+        }
+      }
+
+      .footer__legal {
+        grid-area: legal;
+        width: $ptj;
+        height: $ptj;
+        padding: ($px - 480);
+        border: none;
+
+        div {
+          max-width: ($px - 200);
+
+          span {
+            font-size: ($txtg - 0.6);
+          }
+        }
+      }
+    }
+
+    @media (max-width: 585px) {
+      @include flex-column(column, none);
+
+      h4 {
+        width: ($ptj - 35);
+        margin-inline: auto;
+        align-self: center;
+        margin-bottom: ($px - 495);
+        border-bottom: map-get($map: $color, $key: 'green') solid ($px - 499);
+      }
+
+      .footer__addrs {
+        padding: ($px - 495);
+        border: none;
+
+        address {
+          display: none;
+        }
+      }
+
+      .footer__redes {
+        width: auto;
+        @include flex(space-between, none);
+        border: none;
+
+        h4 {
+          display: none;
+        }
+
+        .div__redes {
+          height: ($ptj - 90);
+        }
+
+        .ms-auto,
+        .me-auto {
+          margin-inline: auto;
+        }
+      }
+
+      .footer__nav {
+        ul {
+          margin-top: ($px - 500);
+
+          li {
+            a {
+              font-size: ($txtg - .5);
+            }
+          }
+        }
+      }
+
+      .footer__legal {
+        div {
+          margin-top: ($px - 500);
+
+          span {
+            font-size: ($txtg - .8);
+          }
+        }
+      }
+    }
+
+    @media (max-width: 295px) {
+      .footer__redes {
+        .div__redes {
+          width: auto;
+
+          a {
+            margin-inline: ($px - 497);
+          }
+        }
+
+        .ms-auto,
+        .me-auto {
+          margin-inline: auto;
+        }
+      }
+
+      .footer__legal {
+        div {
+          margin-top: ($px - 500);
+
+          span {
+            font-size: ($txtg - 1);
           }
         }
       }
