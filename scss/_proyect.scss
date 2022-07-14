@@ -215,7 +215,7 @@
   }
 
   .bg__head {
-    background-image: url(https://res.cloudinary.com/dgqkcp16g/image/upload/v1657636625/bg-general_mq8n9w.png);
+    background: map-get($map:$bg, $key:'black-main', );
     background-size: $ptj;
   }
 
@@ -567,22 +567,22 @@
 
       .card {
         @include flex-column(row, none);
-        border: ($px - 500);
         background-color: map-get($map: $bg, $key: 'black-trans');
+        border-radius: ($px - 490);
+        border: map-get($map: $color, $key: 'gy') solid ($px - 499.90);
 
         .card__div {
           width: ($ptj - 40);
 
           img {
             width: $ptj;
-            border: map-get($map: $color, $key: 'gy') solid ($px - 499.90);
+            border-radius: ($px - 490) ($px - 500) ($px - 500) ($px - 490);
           }
         }
 
         .card-body {
           padding: ($px - 465);
           width: ($ptj - 60);
-          border: map-get($map: $color, $key: 'gy') solid ($px - 499.90);
           @include flex-column(column, none);
           justify-content: center;
 
@@ -681,29 +681,34 @@
         .card {
           @include flex-column(column, none);
           align-self: center;
-        }
 
-        .card .card__div {
-          width: $ptj;
-        }
+          .card__div {
+            width: $ptj;
 
-        .card .card-body {
-          padding: ($px - 495);
-          width: $ptj;
-          height: ($px - 380);
+            img {
+              width: $ptj;
+              border-radius: ($px - 490);
+            }
+          }
+
+          .card-body {
+            padding: ($px - 495);
+            width: $ptj;
+            height: ($px - 380);
+
+            a {
+              font-size: ($txtg - .6);
+            }
+
+            h3 {
+              font-size: ($txtg - .4);
+            }
+          }
         }
 
         .carousel-control-next,
         .carousel-control-prev {
           height: ($ptj - 30);
-        }
-
-        .card .card-body a {
-          font-size: ($txtg - .6);
-        }
-
-        .card .card-body h3 {
-          font-size: ($txtg - .4);
         }
       }
 
@@ -736,6 +741,8 @@
 
         img {
           width: $ptj;
+          border-radius: ($px - 490);
+          border: map-get($map: $color, $key: 'gy') solid ($px - 499.90);
         }
       }
 
@@ -795,7 +802,8 @@
         div {
           @include flex(space-between, none);
           width: $ptj;
-          margin-block: ($px - 495);
+          padding-block: ($px - 490);
+          border-bottom: map-get($map: $color, $key: 'white-trans') ($px - 499.99) solid;
         }
 
         a {
@@ -835,28 +843,16 @@
     .section__index-w {
       @extend .section__index;
       background-color: map-get($map: $bg, $key: 'grey-main');
-
-      h2 {
-        color: map-get($map: $color, $key: 'green');
-      }
     }
 
     .container__3 {
       @extend .container__2;
-
-      a {
-        color: map-get($map: $color, $key: 'green');
-
-        &:hover {
-          color: map-get($map: $color, $key: 'yellow');
-        }
-      }
     }
 
     .section__index-b {
       @extend .section__index;
       background-color: map-get($map: $bg, $key: 'bgmain');
-
+      border-bottom: map-get($map: $color, $key: 'white-trans') ($px - 499.99) solid;
     }
 
     .section__rsl {
@@ -1170,8 +1166,8 @@
     font-size: ($txtg - 0.6);
     color: map-get($map: $color, $key: 'white');
     overflow-x: hidden;
-    background-image: url(https://res.cloudinary.com/dgqkcp16g/image/upload/v1657636625/bg-general_mq8n9w.png);
-    background-size: $ptj;
+    background-color: map-get($map: $bg, $key: 'grey-main');
+    width: $ptj;
 
     h4 {
       margin-bottom: ($px - 480);
@@ -1183,11 +1179,33 @@
     .footer__addrs {
       width: ($ptj - 80);
       text-align: center;
-      padding: ($px - 480);
+      padding-block: ($px - 480);
+
+
+      .div__span {
+        width: $ptj;
+        @include flex-column(column, none);
+        align-self: center;
+
+        span {
+          font-size: ($txth2 + .5);
+          height: ($px - 455);
+          margin-block: auto;
+          color: map-get($map: $color, $key: 'gy');
+          font-family: $titlefonts;
+          text-shadow: ($px - 498) ($px - 498) map-get($map: $color, $key: 'green-shadow');
+        }
+
+        .span_ {
+          font-size: ($txtg - .7);
+          height: ($px - 475);
+        }
+      }
 
       address {
         font-style: normal;
         color: map-get($map: $color, $key: 'gy');
+        margin-block: ($px - 490);
       }
     }
 
@@ -1205,6 +1223,11 @@
           align-self: center;
           text-decoration: none;
           margin-inline: ($px - 490);
+          width: ($px - 468);
+
+          img {
+            width: $ptj;
+          }
         }
       }
 
@@ -1220,7 +1243,7 @@
       padding: ($px - 490);
 
       ul {
-        margin-top: ($px - 460);
+        margin-top: ($px - 475);
         padding-left: ($px - 500);
 
         li {
@@ -1250,7 +1273,7 @@
         max-height: $px;
         max-width: ($px + 400);
         margin-inline: auto;
-        margin-top: ($px - 460);
+        margin-top: ($px - 475);
 
         span {
           font-size: ($txtg - 0.6);
@@ -1271,13 +1294,12 @@
       }
 
       .footer__addrs {
+        @include flex-column(column, none);
+        justify-content: center;
         grid-area: addrs;
         width: $ptj;
-        align-self: center;
-
-        address {
-          margin-block: ($px - 490);
-        }
+        height: $ptj;
+        border-right: map-get($map: $color, $key: 'green') solid ($px - 499);
       }
 
       .footer__redes {
@@ -1286,6 +1308,8 @@
         margin-inline: auto;
         display: flex;
         flex-flow: wrap;
+        border-bottom: map-get($map: $color, $key: 'green') solid ($px - 499);
+        border-right: none;
 
         .div__redes {
           @include flex(center, none);
@@ -1296,11 +1320,17 @@
             margin-inline: ($px - 495);
           }
         }
+
+        .ms-auto,
+        .me-auto {
+          margin-inline: ($px - 500);
+        }
       }
 
       .footer__nav {
         grid-area: fnav;
         width: $ptj;
+        border-right: none;
 
         ul {
           margin-top: ($px - 500);
@@ -1310,6 +1340,7 @@
       .footer__legal {
         grid-area: legal;
         width: $ptj;
+        border-right: none;
 
         div {
           margin-top: ($px - 500);
@@ -1335,12 +1366,9 @@
         "addrs fnav"
         "redes legal";
 
-      h4 {
-        margin-bottom: auto;
-      }
-
       .footer__addrs {
         border-right: map-get($map: $color, $key: 'green') solid ($px - 499);
+        height: $ptj;
       }
 
       .footer__redes {
@@ -1348,6 +1376,7 @@
         height: $ptj;
         padding: ($px - 480);
         display: flex;
+        border-bottom: none;
 
         .div__redes {
           width: $ptj;
@@ -1362,7 +1391,7 @@
         padding: ($px - 480);
 
         ul {
-          margin-top: ($px - 460);
+          margin-top: ($px - 500);
         }
       }
 
@@ -1387,7 +1416,7 @@
       @include flex-column(column, none);
 
       h4 {
-        width: ($ptj - 35);
+        width: ($ptj - 60);
         margin-inline: auto;
         align-self: center;
         margin-bottom: ($px - 495);
@@ -1414,6 +1443,7 @@
 
         .div__redes {
           height: ($ptj - 90);
+          margin-block: ($px - 490);
         }
 
         .ms-auto,
@@ -1437,6 +1467,7 @@
       .footer__legal {
         div {
           margin-top: ($px - 500);
+          width: auto;
 
           span {
             font-size: ($txtg - .8);
@@ -1445,22 +1476,19 @@
       }
     }
 
-    @media (max-width: 295px) {
-      .footer__redes {
-        .div__redes {
-          width: auto;
-
-          a {
-            margin-inline: ($px - 497);
-          }
-        }
-
-        .ms-auto,
-        .me-auto {
-          margin-inline: auto;
-        }
+    @media (max-width: 430px) {
+      h4 {
+        width: ($ptj - 50);
       }
+    }
 
+    @media (max-width: 325px) {
+      h4 {
+        width: ($ptj - 35);
+      }
+    }
+
+    @media (max-width: 295px) {
       .footer__legal {
         div {
           margin-top: ($px - 500);
